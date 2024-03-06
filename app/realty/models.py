@@ -17,4 +17,4 @@ class Flat(models.Model):
     status = models.CharField(max_length=7, choices=STATUS_CHOICES, default='On sale', verbose_name='Статус')
     price = models.PositiveBigIntegerField(verbose_name='Цена')
     description = models.TextField(verbose_name='Описание')
-    photo = models.ImageField()
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
