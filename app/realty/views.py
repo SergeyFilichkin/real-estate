@@ -7,7 +7,7 @@ from .models import Flat
 from .serializers import FlatSerializer
 
 
-class FlatListApi(APIView):
+class FlatListView(APIView):
     def get(self, request):
         data = Flat.objects.all()
         return Response(data=FlatSerializer(data, many=True).data)

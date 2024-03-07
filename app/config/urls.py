@@ -8,7 +8,7 @@ from realty.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/flatlist/', FlatListApi.as_view()),
+    path('api/flats/', FlatListView.as_view()),
     path('api/flats/<int:flat_id>/', FlatDetailView.as_view())
 ]
 
