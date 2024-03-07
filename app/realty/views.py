@@ -7,10 +7,10 @@ from .models import Flat
 from .serializers import FlatSerializer
 
 
-class AllFlatsApi(APIView):
+class FlatListApi(APIView):
     def get(self, request):
         data = Flat.objects.all()
-        return Response({'flats': FlatSerializer(data, many=True).data})
+        return Response(data=FlatSerializer(data, many=True).data)
 
 
 class FlatDetailView(APIView):
@@ -20,15 +20,4 @@ class FlatDetailView(APIView):
         except:
             return Response({'error': 'Object does not exists'})
 
-        return Response({'flat': {
-            'square': flat.square,
-            'living_space': flat.living_space,
-            'kitchen_area': flat.kitchen_area,
-            'rooms': flat.rooms,
-            'floor': flat.floor,
-            'status': flat.status,
-            'price': flat.price,
-            'description': flat.description,
-            'photo': flat.photo.url}
-            }
-        )
+        return Response(data=FlatSerializer(flat).data)
