@@ -21,5 +21,5 @@ class Flat(models.Model):
 
 
 class Floor(models.Model):
-    name = models.CharField(max_length=100, db_index=True)
+    name = models.CharField(max_length=100)
     number = models.PositiveSmallIntegerField(db_index=True)

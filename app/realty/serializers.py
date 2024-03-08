@@ -12,4 +12,4 @@ class FlatSerializer(serializers.Serializer):
     price = serializers.IntegerField()
     description = serializers.CharField()
     photo = serializers.ImageField()
-    floor_id = serializers.PrimaryKeyRelatedField(queryset=Floor.objects.all())
+    floor_id = serializers.IntegerField(source='number')
