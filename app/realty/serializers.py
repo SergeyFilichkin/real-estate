@@ -11,3 +11,8 @@ class FlatSerializer(serializers.Serializer):
     description = serializers.CharField()
     photo = serializers.ImageField()
     floor = serializers.IntegerField(source='floor.number')
+
+
+class FloorSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    number = serializers.IntegerField()
