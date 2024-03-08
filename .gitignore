@@ -1,1 +1,6 @@
 *.env*
+*.pyc
+.vscode
+.DS_Store
+.pylintrc
+db.sqlite3
