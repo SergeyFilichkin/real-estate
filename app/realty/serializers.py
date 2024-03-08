@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from realty.models import Floor
+
 
 class FlatSerializer(serializers.Serializer):
     square = serializers.FloatField()
@@ -10,3 +12,4 @@ class FlatSerializer(serializers.Serializer):
     price = serializers.IntegerField()
     description = serializers.CharField()
     photo = serializers.ImageField()
+    floor_id = serializers.PrimaryKeyRelatedField(queryset=Floor.objects.all())
