@@ -12,9 +12,9 @@ urlpatterns = [
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='docs'),
     path('api/flats/', FlatListView.as_view()),
-    path('api/flats/<int:flat_id>/', FlatDetailView.as_view()),
-    path('api/floors/flats/', FloorListView.as_view()),
-    path('api/floors/<int:pk>/flats/', FloorDetailView.as_view())
+    path('api/<int:flat_id>/', FlatDetailView.as_view()),
+    path('api/floors/', FloorListView.as_view()),
+    path('api/floors/<int:pk>/', FloorDetailView.as_view())
 ]
 
 if settings.DEBUG:

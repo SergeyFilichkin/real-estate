@@ -29,10 +29,16 @@ class FloorListView(APIView):
         data = []
 
         for floor in floors:
-            floor_data = FloorSerializer(floor).data
-            flat_data = FlatSerializer(floor.flat_set.all(), many=True).data
-            floor_data['flats'] = flat_data
-            data.append(floor_data)
+            flats = floor.flat_set.all()
+            result = FloorSerializer({
+                'name': floor.name,
+                'number': floor.number,
+                'flats': flats
+            }).data
+
+            result['flats'] = len(flats)
+
+            data.append(result)
 
         return Response(data)
 
@@ -44,11 +50,11 @@ class FloorDetailView(APIView):
         except:
             return Response({'error': 'Object does not exists'})
 
-        flat = Flat.objects.filter(floor=pk)
-
-        data = {
-            'floor': FloorSerializer(floor).data,
-            'flats': FlatSerializer(flat, many=True).data
-        }
+        flats = list(Flat.objects.filter(floor=pk))
+        data = FloorSerializer({
+            'name': floor.name,
+            'number': floor.number,
+            'flats': flats
+        }).data
 
         return Response(data)
