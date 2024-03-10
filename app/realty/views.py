@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -27,7 +28,7 @@ class FloorListView(APIView):
     def get(self, request):
         data = FloorSelector.get_floors_with_total_flats()
         return Response(data=ListFloorSerializer(data, many=True).data)
-
+      
 
 class FloorDetailView(APIView):
     def get(self, request, pk):
