@@ -1,48 +1,38 @@
-from django.db.models import Count
 from django.shortcuts import render
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Flat, Floor
+from .selectors import FlatSelector, FloorSelector
+
 from .serializers import FlatSerializer, DetailFloorSerializer, ListFloorSerializer
 
 
 class FlatListView(APIView):
     def get(self, request):
-        data = Flat.objects.all()
+        data = FlatSelector.get_all_flats()
         return Response(data=FlatSerializer(data, many=True).data)
 
 
 class FlatDetailView(APIView):
     def get(self, request, flat_id):
-        try:
-            flat = Flat.objects.get(id=flat_id)
-        except:
-            return Response({'error': 'Object does not exists'})
+        data = FlatSelector.get_flat_by_id(flat_id)
+        if not data:
+            return Response({'error': 'Object does not exist'})
 
-        return Response(data=FlatSerializer(flat).data)
+        return Response(data=FlatSerializer(data).data)
 
 
 class FloorListView(APIView):
     def get(self, request):
-        floors = Floor.objects.annotate(total_flats=Count('flat'))
-        data = ListFloorSerializer(floors, many=True).data
-        return Response(data)
+        data = FloorSelector.get_floors_with_total_flats()
+        return Response(data=ListFloorSerializer(data, many=True).data)
 
 
 class FloorDetailView(APIView):
     def get(self, request, pk):
-        try:
-            floor = Floor.objects.get(id=pk)
-        except:
-            return Response({'error': 'Object does not exists'})
+        data = FloorSelector.get_floor_detail(pk)
+        if not data:
+            return Response({'error': 'Object does not exist'})
 
-        flats = list(Flat.objects.filter(floor=pk))
-        data = DetailFloorSerializer({
-            'name': floor.name,
-            'number': floor.number,
-            'flats': flats
-        }).data
-
-        return Response(data)
+        return Response(data=DetailFloorSerializer(data).data)
