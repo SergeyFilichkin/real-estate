@@ -13,11 +13,14 @@ class FlatSerializer(serializers.Serializer):
     floor = serializers.IntegerField(source='floor.number')
 
 
-class FloorSerializer(serializers.Serializer):
+class BaseFloorSerializer(serializers.Serializer):
     name = serializers.CharField()
     number = serializers.IntegerField()
-    flats = FlatSerializer(many=True, required=False)
-    total_flats = serializers.SerializerMethodField()
 
-    def get_total_flats(self, obj):
-        return len(obj.get('flats', []))
+
+class ListFloorSerializer(BaseFloorSerializer):
+    total_flats = serializers.IntegerField()
+
+
+class DetailFloorSerializer(BaseFloorSerializer):
+    flats = FlatSerializer(many=True)

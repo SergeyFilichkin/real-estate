@@ -1,10 +1,11 @@
+from django.db.models import Count
 from django.shortcuts import render
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Flat, Floor
-from .serializers import FlatSerializer, FloorSerializer
+from .serializers import FlatSerializer, DetailFloorSerializer, ListFloorSerializer
 
 
 class FlatListView(APIView):
@@ -25,16 +26,8 @@ class FlatDetailView(APIView):
 
 class FloorListView(APIView):
     def get(self, request):
-        floors = Floor.objects.all()
-        data = []
-
-        for floor in floors:
-            result = FloorSerializer({
-                'name': floor.name,
-                'number': floor.number
-            }).data
-            data.append(result)
-
+        floors = Floor.objects.annotate(total_flats=Count('flat'))
+        data = ListFloorSerializer(floors, many=True).data
         return Response(data)
 
 
@@ -46,7 +39,7 @@ class FloorDetailView(APIView):
             return Response({'error': 'Object does not exists'})
 
         flats = list(Flat.objects.filter(floor=pk))
-        data = FloorSerializer({
+        data = DetailFloorSerializer({
             'name': floor.name,
             'number': floor.number,
             'flats': flats
