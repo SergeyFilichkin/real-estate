@@ -29,15 +29,10 @@ class FloorListView(APIView):
         data = []
 
         for floor in floors:
-            flats = floor.flat_set.all()
             result = FloorSerializer({
                 'name': floor.name,
-                'number': floor.number,
-                'flats': flats
+                'number': floor.number
             }).data
-
-            result['flats'] = len(flats)
-
             data.append(result)
 
         return Response(data)

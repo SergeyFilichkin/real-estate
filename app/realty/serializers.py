@@ -16,13 +16,8 @@ class FlatSerializer(serializers.Serializer):
 class FloorSerializer(serializers.Serializer):
     name = serializers.CharField()
     number = serializers.IntegerField()
-    flats = FlatSerializer(many=True)
+    flats = FlatSerializer(many=True, required=False)
+    total_flats = serializers.SerializerMethodField()
 
-    def to_representation(self, instance):
-        data = {
-            'name': instance['name'],
-            'number': instance['number'],
-            'flats': [FlatSerializer(flat).data for flat in instance['flats']]
-        }
-
-        return data
+    def get_total_flats(self, obj):
+        return len(obj.get('flats', []))
