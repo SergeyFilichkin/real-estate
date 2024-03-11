@@ -23,8 +23,18 @@ class Flat(models.Model):
     description = models.TextField(verbose_name="Описание")
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/")
     floor = models.ForeignKey("Floor", on_delete=models.PROTECT, verbose_name="Этаж")
+    flat_class = models.ForeignKey('FlatClass', default=1, on_delete=models.PROTECT, verbose_name='Класс квартиры')
 
 
 class Floor(models.Model):
     name = models.CharField(max_length=100)
     number = models.PositiveSmallIntegerField(db_index=True)
+
+
+class FlatClass(models.Model):
+    CLASS_CHOICES = [
+        (1, 'Эконом'),
+        (2, 'Комфорт'),
+        (3, 'Люкс')
+    ]
+    name = models.CharField(max_length=1, choices=CLASS_CHOICES, db_index=True)

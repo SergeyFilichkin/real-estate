@@ -29,6 +29,7 @@ class FloorSelector:
             return None
         flats = list(floor.flat_set.all())
         data = {
+            'id': floor.id,
             'name': floor.name,
             'number': floor.number,
             'flats': flats
