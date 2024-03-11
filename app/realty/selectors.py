@@ -1,4 +1,4 @@
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.db.models import Count
 
 from .models import Flat, Floor
@@ -25,7 +25,7 @@ class FloorSelector:
     def get_floor_detail(pk):
         try:
             floor = Floor.objects.get(id=pk)
-        except ObjectDoesNotExist:
+        except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
         flats = list(floor.flat_set.all())
         data = {

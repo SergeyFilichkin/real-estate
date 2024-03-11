@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 
 class FlatSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     square = serializers.FloatField()
     living_space = serializers.FloatField()
     kitchen_area = serializers.FloatField()
@@ -14,6 +15,7 @@ class FlatSerializer(serializers.Serializer):
 
 
 class BaseFloorSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     name = serializers.CharField()
     number = serializers.IntegerField()
 
