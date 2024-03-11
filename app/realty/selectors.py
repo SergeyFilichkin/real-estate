@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Count
 
 from .models import Flat, Floor
@@ -10,11 +11,8 @@ class FlatSelector:
 
     @staticmethod
     def get_flat_by_id(flat_id):
-        try:
-            flat = Flat.objects.get(id=flat_id)
-            return flat
-        except:
-            return None
+        flat = Flat.objects.filter(id=flat_id).first()
+        return flat
 
 
 class FloorSelector:
@@ -27,12 +25,12 @@ class FloorSelector:
     def get_floor_detail(pk):
         try:
             floor = Floor.objects.get(id=pk)
-            flats = list(Flat.objects.filter(floor=pk))
-            data = {
-                'name': floor.name,
-                'number': floor.number,
-                'flats': flats
-            }
-            return data
-        except:
+        except ObjectDoesNotExist:
             return None
+        flats = list(floor.flat_set.all())
+        data = {
+            'name': floor.name,
+            'number': floor.number,
+            'flats': flats
+        }
+        return data
