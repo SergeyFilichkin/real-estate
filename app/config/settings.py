@@ -1,8 +1,8 @@
 from pathlib import Path
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
+
+
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG')
@@ -18,7 +18,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
+    'Reality',
 ]
 
 MIDDLEWARE = [
