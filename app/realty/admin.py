@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from .views import Flat
+from .models import Flat
 
 admin.site.register(Flat)
