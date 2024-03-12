@@ -43,35 +43,38 @@ class FlatCategory(models.Model):
 
 
 class Building(models.Model):
+    STATUS_UNDER_CONSTRUCTION = 'Under construction'
+    STATUS_PASSED = 'Passed'
+
     STATUS_CHOICES = [
-        ('Under construction', 'Строится'),
-        ('Passed', 'Сдан')
+        (STATUS_UNDER_CONSTRUCTION, 'Строится'),
+        (STATUS_PASSED, 'Сдан')
     ]
 
     TYPE_BUILDING_CHOICES = [
         ('Brick', 'Кирпичный'),
         ('Monolithic', 'Монолитный'),
         ('Panel', 'Панельный'),
-
     ]
 
-    PARKING_CHOICES = [
-        ('Present', 'Присутствует'),
-        ('Missing', 'Отсутствует')
-    ]
+    ZERO_ELEVATORS = 'Zero'
+    ONE_ELEVATOR = 'One'
+    TWO_ELEVATORS = 'Two'
+    THREE_ELEVATORS = 'Three'
 
     ELEVATORS_CHOICES = [
-        ('Missing', 'Отсутсвуют'),
-        ('One', 'Один'),
-        ('Two', 'Два'),
-        ('Three', 'Три')
+        (ZERO_ELEVATORS, 0),
+        (ONE_ELEVATOR, 1),
+        (TWO_ELEVATORS, 2),
+        (THREE_ELEVATORS, 3)
     ]
 
     name = models.CharField(max_length=100)
-    date_of_construction = models.DateField()
+    date_of_construction = models.DateField()  # Дата постройки дома
+    date_of_delivery = models.DateField()  # Дата сдачи дома
     address = models.CharField(max_length=100, verbose_name='Адрес')
     number = models.PositiveSmallIntegerField(verbose_name='Номер дома', db_index=True)
-    status = models.CharField(max_length=18, choices=STATUS_CHOICES, null=True, blank=True, verbose_name='Статус')
+    status = models.CharField(max_length=25, choices=STATUS_CHOICES, default=STATUS_UNDER_CONSTRUCTION, verbose_name='Статус')
     type = models.CharField(max_length=10, choices=TYPE_BUILDING_CHOICES, null=True, blank=True, verbose_name='Тип дома')
-    parking = models.CharField(max_length=7, choices=PARKING_CHOICES, null=True, blank=True, verbose_name='Паркинг')
-    elevators = models.CharField(max_length=7, choices=ELEVATORS_CHOICES, null=True, blank=True, verbose_name='Лифты')
+    has_parking = models.BooleanField(default=True, verbose_name='Паркинг')
+    elevators = models.IntegerField(choices=ELEVATORS_CHOICES, default=TWO_ELEVATORS, verbose_name='Лифты')
