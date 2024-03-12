@@ -7,11 +7,11 @@ from .models import Flat, Floor
 class FlatSelector:
     @staticmethod
     def get_all_flats():
-        return Flat.objects.all()
+        return Flat.objects.all().select_related('floor', 'category')
 
     @staticmethod
     def get_flat_by_id(flat_id):
-        flat = Flat.objects.filter(id=flat_id).first()
+        flat = Flat.objects.filter(id=flat_id).select_related('floor', 'category').first()
         return flat
 
 
@@ -27,7 +27,7 @@ class FloorSelector:
             floor = Floor.objects.get(id=pk)
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
-        flats = list(floor.flat_set.all())
+        flats = list(floor.flat_set.all().select_related('floor', 'category'))
         data = {
             'id': floor.id,
             'name': floor.name,
