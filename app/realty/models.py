@@ -24,6 +24,7 @@ class Flat(models.Model):
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/")
     floor = models.ForeignKey("Floor", on_delete=models.PROTECT, verbose_name="Этаж")
     category = models.ForeignKey('FlatCategory', null=True, blank=True, on_delete=models.PROTECT, verbose_name='Класс квартиры')
+    building = models.ForeignKey('Building', null=True, blank=True, on_delete=models.PROTECT)
 
 
 class Floor(models.Model):
@@ -38,3 +39,10 @@ class FlatCategory(models.Model):
         ('Luxe', 'Люкс')
     ]
     name = models.CharField(max_length=7, choices=CLASS_CHOICES, db_index=True)
+
+
+class Building(models.Model):
+    name = models.CharField(max_length=100)
+    date_of_construction = models.DateField()
+    address = models.CharField(max_length=100, verbose_name='Адрес', db_index=True)
+
