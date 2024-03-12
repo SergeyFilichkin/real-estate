@@ -38,11 +38,40 @@ class FlatCategory(models.Model):
         ('Comfort', 'Комфорт'),
         ('Luxe', 'Люкс')
     ]
+
     name = models.CharField(max_length=7, choices=CLASS_CHOICES, db_index=True)
 
 
 class Building(models.Model):
+    STATUS_CHOICES = [
+        ('Under construction', 'Строится'),
+        ('Passed', 'Сдан')
+    ]
+
+    TYPE_BUILDING_CHOICES = [
+        ('Brick', 'Кирпичный'),
+        ('Monolithic', 'Монолитный'),
+        ('Panel', 'Панельный'),
+
+    ]
+
+    PARKING_CHOICES = [
+        ('Present', 'Присутствует'),
+        ('Missing', 'Отсутствует')
+    ]
+
+    ELEVATORS_CHOICES = [
+        ('Missing', 'Отсутсвуют'),
+        ('One', 'Один'),
+        ('Two', 'Два'),
+        ('Three', 'Три')
+    ]
+
     name = models.CharField(max_length=100)
     date_of_construction = models.DateField()
-    address = models.CharField(max_length=100, verbose_name='Адрес', db_index=True)
-
+    address = models.CharField(max_length=100, verbose_name='Адрес')
+    number = models.PositiveSmallIntegerField(verbose_name='Номер дома', db_index=True)
+    status = models.CharField(max_length=18, choices=STATUS_CHOICES, null=True, blank=True, verbose_name='Статус')
+    type = models.CharField(max_length=10, choices=TYPE_BUILDING_CHOICES, null=True, blank=True, verbose_name='Тип дома')
+    parking = models.CharField(max_length=7, choices=PARKING_CHOICES, null=True, blank=True, verbose_name='Паркинг')
+    elevators = models.CharField(max_length=7, choices=ELEVATORS_CHOICES, null=True, blank=True, verbose_name='Лифты')
