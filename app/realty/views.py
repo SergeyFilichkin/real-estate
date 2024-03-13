@@ -4,8 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .selectors import FlatSelector, FloorSelector, BuildingSelector
-from .serializers import (FlatSerializer, DetailFloorSerializer, ListFloorSerializer, ListBuildingSerializer,
-                          DetailBuildingSerializer)
+from .serializers import FlatSerializer, DetailFloorSerializer, ListFloorSerializer, ListBuildingSerializer, DetailBuildingSerializer
 
 
 class FlatListView(APIView):
