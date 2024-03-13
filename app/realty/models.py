@@ -3,8 +3,10 @@ from django.db import models
 
 
 class Flat(models.Model):
+    ON_SALE = 'On sale'
+    SOLD = 'Sold'
 
-    STATUS_CHOICES = [("On sale", "В продаже"), ("Sold", "Продана")]
+    STATUS_CHOICES = [(ON_SALE, "В продаже"), (SOLD, "Продана")]
 
     square = models.FloatField(
         verbose_name="Общая площадь", validators=[MinValueValidator(limit_value=0)]
@@ -17,7 +19,7 @@ class Flat(models.Model):
     )
     rooms = models.PositiveSmallIntegerField(verbose_name="Количество комнат")
     status = models.CharField(
-        max_length=7, choices=STATUS_CHOICES, default="On sale", verbose_name="Статус"
+        max_length=7, choices=STATUS_CHOICES, default=ON_SALE, verbose_name="Статус"
     )
     price = models.PositiveBigIntegerField(verbose_name="Цена")
     description = models.TextField(verbose_name="Описание")
@@ -57,21 +59,21 @@ class Building(models.Model):
         ('Panel', 'Панельный'),
     ]
 
-    ZERO_ELEVATORS = 'Zero'
-    ONE_ELEVATOR = 'One'
-    TWO_ELEVATORS = 'Two'
-    THREE_ELEVATORS = 'Three'
+    ZERO_ELEVATORS = 0
+    ONE_ELEVATOR = 1
+    TWO_ELEVATORS = 2
+    THREE_ELEVATORS = 3
 
     ELEVATORS_CHOICES = [
-        (ZERO_ELEVATORS, 0),
-        (ONE_ELEVATOR, 1),
-        (TWO_ELEVATORS, 2),
-        (THREE_ELEVATORS, 3)
+        (ZERO_ELEVATORS, 'Zero'),
+        (ONE_ELEVATOR, 'One'),
+        (TWO_ELEVATORS, 'Two'),
+        (THREE_ELEVATORS, 'Three')
     ]
 
     name = models.CharField(max_length=100)
-    date_of_construction = models.DateField()  # Дата постройки дома
-    date_of_delivery = models.DateField()  # Дата сдачи дома
+    date_of_construction = models.DateField(verbose_name='Дата постройки дома')
+    date_of_delivery = models.DateField(verbose_name='Дата сдачи дома')
     address = models.CharField(max_length=100, verbose_name='Адрес')
     number = models.PositiveSmallIntegerField(verbose_name='Номер дома', db_index=True)
     status = models.CharField(max_length=25, choices=STATUS_CHOICES, default=STATUS_UNDER_CONSTRUCTION, verbose_name='Статус')
