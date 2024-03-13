@@ -49,7 +49,7 @@ class BuildingSelector:
             building = Building.objects.get(id=pk)
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
-        total_flats = Flat.objects.filter(building_id=pk)
+        total_flats = Flat.objects.select_related('building').filter(building_id=pk).count()
 
         data = {
             'id': building.id,
@@ -63,6 +63,6 @@ class BuildingSelector:
             'type': building.type,
             'has_parking': building.has_parking,
             'elevators': building.elevators,
-            'total_flats': len(total_flats)
+            'total_flats': total_flats
         }
         return data
