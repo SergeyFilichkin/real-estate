@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.db.models import Count
 
-from .models import Flat, Floor
+from .models import Flat, Floor, Building
 
 
 class FlatSelector:
@@ -33,5 +33,36 @@ class FloorSelector:
             'name': floor.name,
             'number': floor.number,
             'flats': flats
+        }
+        return data
+
+
+class BuildingSelector:
+    @staticmethod
+    def get_all_buildings():
+        buildings = Building.objects.all()
+        return buildings
+
+    @staticmethod
+    def get_building_detail(pk):
+        try:
+            building = Building.objects.get(id=pk)
+        except (ObjectDoesNotExist, MultipleObjectsReturned):
+            return None
+        total_flats = Flat.objects.filter(building_id=pk)
+
+        data = {
+            'id': building.id,
+            'floors': building.floors,
+            'name': building.name,
+            'date_of_construction': building.date_of_construction,
+            'date_of_delivery': building.date_of_delivery,
+            'address': building.address,
+            'number': building.number,
+            'status': building.status,
+            'type': building.type,
+            'has_parking': building.has_parking,
+            'elevators': building.elevators,
+            'total_flats': len(total_flats)
         }
         return data

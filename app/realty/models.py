@@ -72,6 +72,7 @@ class Building(models.Model):
     ]
 
     name = models.CharField(max_length=100)
+    floors = models.PositiveSmallIntegerField(verbose_name='Количество этажей')
     date_of_construction = models.DateField(verbose_name='Дата постройки дома')
     date_of_delivery = models.DateField(verbose_name='Дата сдачи дома')
     address = models.CharField(max_length=100, verbose_name='Адрес')
