@@ -65,10 +65,10 @@ class Building(models.Model):
     THREE_ELEVATORS = 3
 
     ELEVATORS_CHOICES = [
-        (ZERO_ELEVATORS, 'Zero'),
-        (ONE_ELEVATOR, 'One'),
-        (TWO_ELEVATORS, 'Two'),
-        (THREE_ELEVATORS, 'Three')
+        (ZERO_ELEVATORS, 'Ноль'),
+        (ONE_ELEVATOR, 'Один'),
+        (TWO_ELEVATORS, 'Два'),
+        (THREE_ELEVATORS, 'Три')
     ]
 
     name = models.CharField(max_length=100)
