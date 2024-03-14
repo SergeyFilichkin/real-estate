@@ -71,7 +71,7 @@ class Building(models.Model):
         (THREE_ELEVATORS, 'Три')
     ]
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name='Название')
     floors = models.PositiveSmallIntegerField(verbose_name='Количество этажей')
     date_of_construction = models.DateField(verbose_name='Дата постройки дома')
     date_of_delivery = models.DateField(verbose_name='Дата сдачи дома')
@@ -81,3 +81,9 @@ class Building(models.Model):
     type = models.CharField(max_length=10, choices=TYPE_BUILDING_CHOICES, null=True, blank=True, verbose_name='Тип дома')
     has_parking = models.BooleanField(default=True, verbose_name='Паркинг')
     elevators = models.IntegerField(choices=ELEVATORS_CHOICES, default=TWO_ELEVATORS, verbose_name='Лифты')
+    project = models.ForeignKey('Project', null=True, blank=True, on_delete=models.PROTECT)
+
+
+class Project(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Название', db_index=True)
+    description = models.TextField(verbose_name="Описание")
