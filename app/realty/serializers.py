@@ -45,3 +45,13 @@ class ListBuildingSerializer(serializers.Serializer):
 
 class DetailBuildingSerializer(ListBuildingSerializer):
     total_flats = serializers.IntegerField()
+
+
+class ListProjectSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+    description = serializers.CharField()
+
+
+class DetailProjectSerializer(ListProjectSerializer):
+    buildings = ListBuildingSerializer(many=True)

@@ -3,8 +3,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .selectors import FlatSelector, FloorSelector, BuildingSelector
-from .serializers import FlatSerializer, DetailFloorSerializer, ListFloorSerializer, ListBuildingSerializer, DetailBuildingSerializer
+from .selectors import FlatSelector, FloorSelector, BuildingSelector, ProjectSelector
+from .serializers import FlatSerializer, DetailFloorSerializer, ListFloorSerializer, ListBuildingSerializer, DetailBuildingSerializer, ListProjectSerializer, DetailProjectSerializer
 
 
 class FlatListView(APIView):
@@ -50,3 +50,18 @@ class BuildingDetailView(APIView):
             return Response({'error': 'Object does not exist'})
 
         return Response(data=DetailBuildingSerializer(building).data)
+
+
+class ProjectListView(APIView):
+    def get(self, request):
+        all_projects = ProjectSelector.get_all_projects()
+        return Response(data=ListProjectSerializer(all_projects, many=True).data)
+
+
+class ProjectDetailView(APIView):
+    def get(self, request, project_id):
+        project = ProjectSelector.get_project_detail(project_id)
+        if not project:
+            return Response({'error': 'Object does not exist'})
+
+        return Response(data=DetailProjectSerializer(project).data)
