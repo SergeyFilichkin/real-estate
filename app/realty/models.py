@@ -85,6 +85,5 @@ class Building(models.Model):
 
 
 class Project(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Название')
+    name = models.CharField(max_length=100, verbose_name='Название', db_index=True)
     description = models.TextField(verbose_name="Описание")
-    number = models.PositiveSmallIntegerField(verbose_name='Номер проекта', db_index=True)
