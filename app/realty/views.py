@@ -3,8 +3,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .selectors import FlatSelector, FloorSelector
-from .serializers import FlatSerializer, DetailFloorSerializer, ListFloorSerializer
+from .selectors import FlatSelector, FloorSelector, BuildingSelector
+from .serializers import FlatSerializer, DetailFloorSerializer, ListFloorSerializer, ListBuildingSerializer, DetailBuildingSerializer
 
 
 class FlatListView(APIView):
@@ -35,3 +35,18 @@ class FloorDetailView(APIView):
             return Response({'error': 'Object does not exist'})
 
         return Response(data=DetailFloorSerializer(floor).data)
+
+
+class BuildingListView(APIView):
+    def get(self, request):
+        all_buildings = BuildingSelector.get_all_buildings()
+        return Response(data=ListBuildingSerializer(all_buildings, many=True).data)
+
+
+class BuildingDetailView(APIView):
+    def get(self, request, building_id):
+        building = BuildingSelector.get_building_detail(building_id)
+        if not building:
+            return Response({'error': 'Object does not exist'})
+
+        return Response(data=DetailBuildingSerializer(building).data)
