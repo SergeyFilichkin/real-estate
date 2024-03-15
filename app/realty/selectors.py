@@ -80,13 +80,13 @@ class ProjectSelector:
             project = Project.objects.get(id=pk)
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
-        buildings = Building.objects.select_related('project').filter(project_id=pk)
+        total_flats = Flat.objects.select_related('building').filter(building__project_id=pk).count()
 
         data = {
             'id': project.id,
             'name': project.name,
             'description': project.description,
-            'buildings': buildings
+            'total_flats': total_flats
         }
 
         return data

@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .selectors import FlatSelector, FloorSelector, BuildingSelector, ProjectSelector
-from .serializers import FlatSerializer, DetailFloorSerializer, ListFloorSerializer, ListBuildingSerializer, DetailBuildingSerializer, ListProjectSerializer, DetailProjectSerializer
+from .serializers import FlatSerializer, DetailFloorSerializer, ListFloorSerializer, ListBuildingSerializer, DetailBuildingSerializer, ProjectSerializer, DetailProjectSerializer
 
 
 class FlatListView(APIView):
@@ -55,7 +55,7 @@ class BuildingDetailView(APIView):
 class ProjectListView(APIView):
     def get(self, request):
         all_projects = ProjectSelector.get_all_projects()
-        return Response(data=ListProjectSerializer(all_projects, many=True).data)
+        return Response(data=ProjectSerializer(all_projects, many=True).data)
 
 
 class ProjectDetailView(APIView):
