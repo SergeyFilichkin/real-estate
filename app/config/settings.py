@@ -1,10 +1,18 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import random
+import string
+
+def generate_secret_key():
+    chars = ''.join([random.SystemRandom().choice("{}{}{}".format(string.ascii_letters, string.digits, string.punctuation)) for i in range(50)])
+    return chars
+
+SECRET_KEY = generate_secret_key()
 
 load_dotenv()
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+
 DEBUG = os.getenv('DEBUG')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,7 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
+    'realty',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +84,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
