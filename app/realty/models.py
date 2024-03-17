@@ -55,7 +55,7 @@ class FlatCategory(models.Model):
 
     def __str__(self) -> str:
         """returns FlateCategory neme description"""
-        return f"{dict(self.CLASS_CHOICES).get(self.name, '')}"
+        return f'{self.get_name_display()}'
 
 
 class Building(models.Model):
