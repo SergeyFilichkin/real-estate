@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
-from realty.models.building_model import Building
-from realty.models.flat_model import Flat
+from realty.models.building import Building
+from realty.models.flat import Flat
 
 
 class BuildingSelector:

@@ -1,4 +1,4 @@
-from realty.models.flat_model import Flat
+from realty.models.flat import Flat
 
 
 class FlatSelector:

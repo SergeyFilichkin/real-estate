@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
-from realty.models.building_model import Building
-from realty.models.project_model import Project
+from realty.models.building import Building
+from realty.models.project import Project
 
 
 class ProjectSelector:

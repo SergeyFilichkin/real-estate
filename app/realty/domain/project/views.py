@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .selector import ProjectSelector
-from ...models.building_model import Building
+from ...models.building import Building
 
 
 class ProjectListView(APIView):

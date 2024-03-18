@@ -1,9 +1,9 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 
-from .building_model import Building
-from .flatcategory_model import FlatCategory
-from .floor_model import Floor
+from .building import Building
+from .flatcategory import FlatCategory
+from .floor import Floor
 
 
 class Flat(models.Model):

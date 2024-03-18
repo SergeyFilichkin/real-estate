@@ -1,6 +1,6 @@
 from django.db import models
 
-from .project_model import Project
+from .project import Project
 
 
 class Building(models.Model):

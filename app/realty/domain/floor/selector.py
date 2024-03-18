@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.db.models import Count
 
-from realty.models.floor_model import Floor
+from realty.models.floor import Floor
 
 
 class FloorSelector:
