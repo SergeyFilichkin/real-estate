@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from .models import Flat
+from realty.models.flat_model import Flat
 
 admin.site.register(Flat)

@@ -2,17 +2,20 @@ from django.conf.urls.static import static
 from django.urls import path
 
 from config import settings
-from .views import FlatListView, FlatDetailView, FloorListView, FloorDetailView, BuildingListView, BuildingDetailView, ProjectListView, ProjectDetailView
+from .domain.building.urls import building_list, building_detail
+from .domain.flat.urls import flat_list, flat_detail
+from .domain.floor.urls import floor_list, floor_detail
+from .domain.project.urls import project_list, project_detail
 
 urlpatterns = [
-    path('flats/', FlatListView.as_view()),
-    path('flats/<int:flat_id>/', FlatDetailView.as_view()),
-    path('floors/', FloorListView.as_view()),
-    path('floors/<int:pk>/', FloorDetailView.as_view()),
-    path('buildings/', BuildingListView.as_view()),
-    path('buildings/<int:building_id>/', BuildingDetailView.as_view()),
-    path('projects/', ProjectListView.as_view()),
-    path('projects/<int:project_id>/', ProjectDetailView.as_view())
+    flat_list,
+    flat_detail,
+    floor_list,
+    floor_detail,
+    building_list,
+    building_detail,
+    project_list,
+    project_detail
 ]
 
 if settings.DEBUG:
