@@ -1,1 +1,7 @@
 *.env*
+.env_example
+db.sqlite3/
+__pycache__
+__init__.py/
+migrations/__pycache__
+venv
