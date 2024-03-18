@@ -1,17 +1,10 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-import random
-import string
-
-def generate_secret_key():
-    chars = ''.join([random.SystemRandom().choice("{}{}{}".format(string.ascii_letters, string.digits, string.punctuation)) for i in range(50)])
-    return chars
-
-SECRET_KEY = generate_secret_key()
 
 load_dotenv()
 
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = os.getenv('DEBUG')
 
