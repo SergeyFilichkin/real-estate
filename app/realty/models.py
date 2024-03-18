@@ -25,13 +25,23 @@ class Flat(models.Model):
     description = models.TextField(verbose_name="Описание")
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/")
     floor = models.ForeignKey("Floor", on_delete=models.PROTECT, verbose_name="Этаж")
-    category = models.ForeignKey('FlatCategory', null=True, blank=True, on_delete=models.PROTECT, verbose_name='Класс квартиры')
+    category = models.ForeignKey(
+        "FlatCategory",
+        null=True,
+        blank=True,
+        on_delete=models.PROTECT,
+        verbose_name="Класс квартиры",
+    )
     building = models.ForeignKey('Building', null=True, blank=True, on_delete=models.PROTECT)
+
+    class Meta:
+        verbose_name = "Квартира"
+        verbose_name_plural = "Квартиры"
 
 
 class Floor(models.Model):
-    name = models.CharField(max_length=100)
     number = models.PositiveSmallIntegerField(db_index=True)
+    name = models.CharField(max_length=100)
 
 
 class FlatCategory(models.Model):
@@ -42,6 +52,10 @@ class FlatCategory(models.Model):
     ]
 
     name = models.CharField(max_length=7, choices=CLASS_CHOICES, db_index=True)
+
+    def __str__(self) -> str:
+        """returns FlateCategory neme description"""
+        return self.get_name_display()
 
 
 class Building(models.Model):
