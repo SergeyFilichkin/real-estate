@@ -3,16 +3,13 @@ import os
 from dotenv import load_dotenv
 import random
 import string
-
-def generate_secret_key():
-    chars = ''.join([random.SystemRandom().choice("{}{}{}".format(string.ascii_letters, string.digits, string.punctuation)) for i in range(50)])
-    return chars
-
-SECRET_KEY = generate_secret_key()
+from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 load_dotenv()
 
-
+SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +25,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'realty',
+    'drf_spectacular',
 ]
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
