@@ -1,11 +1,8 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-import random
-import string
-from pathlib import Path
-import os
-from dotenv import load_dotenv
+
+
 
 load_dotenv()
 
@@ -29,11 +26,8 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
-
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
