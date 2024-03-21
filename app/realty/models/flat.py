@@ -31,3 +31,7 @@ class Flat(models.Model):
     floor = models.ForeignKey(Floor, on_delete=models.PROTECT, verbose_name="Этаж")
     category = models.ForeignKey(FlatCategory, null=True, blank=True, on_delete=models.PROTECT, verbose_name='Класс квартиры')
     building = models.ForeignKey(Building, null=True, blank=True, on_delete=models.PROTECT)
+
+    class Meta:
+        verbose_name = "Квартира"
+        verbose_name_plural = "Квартиры"
