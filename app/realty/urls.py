@@ -3,10 +3,10 @@ from django.urls import path, include
 
 from config import settings
 
-flats_api_v1_urls = [path('', include('realty.domain.flat.urls'))]
-buildings_api_v1_urls = [path('', include('realty.domain.building.urls'))]
-floors_api_v1_urls = [path('', include('realty.domain.floor.urls'))]
-projects_api_v1_urls = [path('', include('realty.domain.project.urls'))]
+flats_api_v1_urls = [path('flats/', include('realty.domain.flat.urls'))]
+buildings_api_v1_urls = [path('buildings/', include('realty.domain.building.urls'))]
+floors_api_v1_urls = [path('floors/', include('realty.domain.floor.urls'))]
+projects_api_v1_urls = [path('projects/', include('realty.domain.project.urls'))]
 
 urlpatterns = [
     path('v1/', include(buildings_api_v1_urls)),

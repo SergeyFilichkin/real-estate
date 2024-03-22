@@ -19,33 +19,15 @@ class ProjectListView(APIView):
 
 
 class ProjectDetailView(APIView):
-    class BuildingsSerializer(serializers.Serializer):
-        id = serializers.IntegerField()
-        floors = serializers.IntegerField()
-        name = serializers.CharField()
-        date_of_construction = serializers.DateField()
-        date_of_delivery = serializers.DateField()
-        address = serializers.CharField()
-        number = serializers.IntegerField()
-        status = serializers.CharField()
-        type = serializers.CharField()
-        has_parking = serializers.BooleanField()
-        elevators = serializers.IntegerField()
-
     class ProjectDetailSerializer(serializers.Serializer):
         id = serializers.IntegerField()
         name = serializers.CharField()
         description = serializers.CharField()
-        buildings = serializers.SerializerMethodField()
-
-        def get_buildings(self, project):
-            buildings_data = Building.oblects.filter(project_id=id)
-            serializer = self.BuildingsSerializer(buildings_data, many=True)
-            return serializer.data
+        buildings = serializers.IntegerField()
 
     def get(self, request, project_id):
         project = ProjectSelector.get_project_detail(project_id)
         if not project:
             return Response({'error': 'Object does not exist'})
 
-        return Response(data)
+        return Response(data=self.ProjectDetailSerializer(project).data)
