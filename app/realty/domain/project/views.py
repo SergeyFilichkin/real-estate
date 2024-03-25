@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 
 from .selector import ProjectSelector
 from ...models.building import Building
+from ...inline_serializer import inline_serializer
 
 
 class ProjectListView(APIView):
@@ -23,7 +24,24 @@ class ProjectDetailView(APIView):
         id = serializers.IntegerField()
         name = serializers.CharField()
         description = serializers.CharField()
-        buildings = serializers.IntegerField()
+        buildings = inline_serializer(
+            name='Корпусы и квартиры проекта',
+            fields={
+                'id': serializers.IntegerField(),
+                'floors': serializers.IntegerField(),
+                'name': serializers.CharField(),
+                'date_of_construction': serializers.DateField(),
+                'date_of_delivery': serializers.DateField(),
+                'address': serializers.CharField(),
+                'number': serializers.IntegerField(),
+                'status': serializers.CharField(),
+                'type': serializers.CharField(),
+                'has_parking': serializers.BooleanField(),
+                'elevators': serializers.IntegerField(),
+                'total_flats': serializers.IntegerField()
+            },
+            many=True
+        )
 
     def get(self, request, project_id):
         project = ProjectSelector.get_project_detail(project_id)

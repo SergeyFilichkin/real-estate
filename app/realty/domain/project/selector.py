@@ -1,6 +1,8 @@
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from django.db.models import Count
 
 from realty.models.building import Building
+from realty.models.flat import Flat
 from realty.models.project import Project
 
 
@@ -16,7 +18,7 @@ class ProjectSelector:
             project = Project.objects.get(id=pk)
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
-        buildings = Building.objects.select_related('project').filter(project_id=pk)
+        buildings = list(project.building_set.all().select_related('project').annotate(total_flats=Count('flat')))
 
         data = {
             'id': project.id,
