@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from realty.models import Floor
 
 
 class FlatSerializer(serializers.Serializer):
@@ -11,3 +12,4 @@ class FlatSerializer(serializers.Serializer):
     price = serializers.IntegerField()
     description = serializers.CharField()
     photo = serializers.ImageField()
+    floor = serializers.IntegerField()
