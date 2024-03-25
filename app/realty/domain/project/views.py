@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .selector import ProjectSelector
-from ...models.building import Building
 from ...inline_serializer import inline_serializer
 
 

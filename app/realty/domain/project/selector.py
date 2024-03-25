@@ -1,8 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.db.models import Count
 
-from realty.models.building import Building
-from realty.models.flat import Flat
+from .entities import ProjectEntity
 from realty.models.project import Project
 
 
@@ -20,11 +19,11 @@ class ProjectSelector:
             return None
         buildings = list(project.building_set.all().select_related('project').annotate(total_flats=Count('flat')))
 
-        data = {
-            'id': project.id,
-            'name': project.name,
-            'description': project.description,
-            'buildings': buildings
-        }
+        data = ProjectEntity(
+            id=project.id,
+            name=project.name,
+            description=project.description,
+            buildings=buildings
+        )
 
         return data

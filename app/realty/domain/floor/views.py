@@ -35,8 +35,8 @@ class FloorDetailView(APIView):
                 'price': serializers.IntegerField(),
                 'description': serializers.CharField(),
                 'photo': serializers.ImageField(),
-                'floor': serializers.IntegerField(source='floor.number'),
-                'category': serializers.CharField(source='category.name')
+                'floor': serializers.IntegerField,
+                'category': serializers.CharField
             },
             many=True
         )

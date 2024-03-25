@@ -1,6 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.db.models import Count
 
+from .entities import FloorEntity
 from realty.models.floor import Floor
 
 
@@ -17,10 +18,10 @@ class FloorSelector:
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
         flats = list(floor.flat_set.all().select_related('floor', 'category'))
-        data = {
-            'id': floor.id,
-            'name': floor.name,
-            'number': floor.number,
-            'flats': flats
-        }
+        data = FloorEntity(
+            id=floor.id,
+            name=floor.name,
+            number=floor.number,
+            flats=flats
+        )
         return data
