@@ -21,6 +21,5 @@ class Flat(models.Model):
 class Floor(models.Model):
     floor_number = models.PositiveSmallIntegerField(verbose_name='Номер этажа')
 
-
-def __str__(self):
-    return f'Этаж {self.floor_number}'
+    def __str__(self):
+        return f'Этаж {self.floor_number}'
