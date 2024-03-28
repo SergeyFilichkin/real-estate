@@ -1,7 +1,5 @@
 from rest_framework import serializers
-
 from realty.models import Floor
-
 
 
 class FlatSerializer(serializers.Serializer):

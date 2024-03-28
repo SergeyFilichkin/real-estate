@@ -16,10 +16,8 @@ class Flat(models.Model):
     price = models.PositiveBigIntegerField(verbose_name='Цена')
     description = models.TextField(verbose_name='Описание')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    floor = models.ForeignKey('Floor', on_delete=models.PROTECT, verbose_name='Этаж')
 
 
 class Floor(models.Model):
     floor_number = models.PositiveSmallIntegerField(verbose_name='Номер этажа')
-
-    def __str__(self):
-        return f'Этаж {self.floor_number}'
