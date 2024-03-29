@@ -20,7 +20,7 @@ class FlatListView(APIView):
 
     def get(self, request):
         all_flats = FlatSelector.get_all_flats()
-        return Response(data=self.FlatSerializer(all_flats.all_flats, many=True).data)
+        return Response(data=self.FlatSerializer(all_flats, many=True).data)
 
 
 class FlatDetailView(APIView):

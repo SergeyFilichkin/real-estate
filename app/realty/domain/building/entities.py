@@ -18,10 +18,5 @@ class BuildingEntity:
 
 
 @dataclass
-class ListBuildingsEntity:
-    all_buildings: list[BuildingEntity]
-
-
-@dataclass
 class DetailBuildingEntity(BuildingEntity):
     total_flats: int

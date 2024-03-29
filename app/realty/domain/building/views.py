@@ -18,10 +18,11 @@ class BuildingListView(APIView):
         type = serializers.CharField()
         has_parking = serializers.BooleanField()
         elevators = serializers.IntegerField()
+        project = serializers.CharField()
 
     def get(self, request):
         all_buildings = BuildingSelector.get_all_buildings()
-        return Response(data=self.ListBuildingSerializer(all_buildings.all_buildings, many=True).data)
+        return Response(data=self.ListBuildingSerializer(all_buildings, many=True).data)
 
 
 class BuildingDetailView(APIView):
@@ -37,6 +38,7 @@ class BuildingDetailView(APIView):
         type = serializers.CharField()
         has_parking = serializers.BooleanField()
         elevators = serializers.IntegerField()
+        project = serializers.CharField()
         total_flats = serializers.IntegerField()
 
     def get(self, request, building_id):

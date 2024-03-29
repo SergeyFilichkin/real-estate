@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class DetailFlatEntity:
+class FlatEntity:
     id: int
     square: float
     living_space: float
@@ -15,8 +15,3 @@ class DetailFlatEntity:
     floor: int
     category: int
     building: int
-
-
-@dataclass
-class ListFlatEntity:
-    all_flats: list[DetailFlatEntity]

@@ -1,6 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
-from realty.domain.building.entities import DetailBuildingEntity, ListBuildingsEntity, BuildingEntity
+from realty.domain.building.entities import DetailBuildingEntity, BuildingEntity
 from realty.models.building import Building
 
 
@@ -8,7 +8,7 @@ class BuildingSelector:
     @staticmethod
     def get_all_buildings():
         buildings = Building.objects.all()
-        buildings_entities = [
+        data = [
             BuildingEntity(
                 id=building.id,
                 floors=building.floors,
@@ -21,12 +21,10 @@ class BuildingSelector:
                 type=building.type,
                 has_parking=building.has_parking,
                 elevators=building.elevators,
-                project=building.project
+                project=building.project.name
             )
             for building in buildings
         ]
-
-        data = ListBuildingsEntity(all_buildings=buildings_entities)
 
         return data
 
@@ -36,7 +34,7 @@ class BuildingSelector:
             building = Building.objects.get(id=pk)
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
-        total_flats = Building.objects.get(pk=pk).flat_set.count()
+        total_flats = building.flat_set.count()
 
         data = DetailBuildingEntity(
             id=building.id,
@@ -50,7 +48,8 @@ class BuildingSelector:
             type=building.type,
             has_parking=building.has_parking,
             elevators=building.elevators,
-            project=building.project,
+            project=building.project.name,
             total_flats=total_flats
         )
+
         return data
