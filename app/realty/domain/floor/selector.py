@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.db.models import Count
 
-from .entities import FloorEntity
+from realty.domain.floor.entities import FloorEntity
 from realty.models.floor import Floor
 
 

@@ -24,7 +24,7 @@ class FloorDetailView(APIView):
         name = serializers.CharField()
         number = serializers.IntegerField()
         flats = inline_serializer(
-            name='Квартиры',
+            name='Flats',
             fields={
                 'id': serializers.IntegerField(),
                 'square': serializers.FloatField(),

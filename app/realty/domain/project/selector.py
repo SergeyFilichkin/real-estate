@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.db.models import Count
 
-from .entities import ProjectEntity
+from realty.domain.project.entities import ProjectEntity
 from realty.models.project import Project
 
 

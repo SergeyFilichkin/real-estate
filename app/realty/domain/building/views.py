@@ -21,7 +21,7 @@ class BuildingListView(APIView):
 
     def get(self, request):
         all_buildings = BuildingSelector.get_all_buildings()
-        return Response(data=self.ListBuildingSerializer(all_buildings, many=True).data)
+        return Response(data=self.ListBuildingSerializer(all_buildings.all_buildings, many=True).data)
 
 
 class BuildingDetailView(APIView):

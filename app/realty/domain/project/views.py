@@ -24,7 +24,7 @@ class ProjectDetailView(APIView):
         name = serializers.CharField()
         description = serializers.CharField()
         buildings = inline_serializer(
-            name='Корпусы и квартиры проекта',
+            name='Buildings',
             fields={
                 'id': serializers.IntegerField(),
                 'floors': serializers.IntegerField(),

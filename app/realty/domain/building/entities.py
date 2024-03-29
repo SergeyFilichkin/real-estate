@@ -14,4 +14,14 @@ class BuildingEntity:
     type: str
     has_parking: bool
     elevators: int
+    project: int
+
+
+@dataclass
+class ListBuildingsEntity:
+    all_buildings: list[BuildingEntity]
+
+
+@dataclass
+class DetailBuildingEntity(BuildingEntity):
     total_flats: int
