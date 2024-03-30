@@ -18,7 +18,7 @@ class ProjectSelector:
             project = Project.objects.get(id=pk)
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
-        buildings = project.building_set.all().select_related('project').annotate(total_flats=Count('flat'))
+        buildings = project.building_set.all().prefetch_related('project').annotate(total_flats=Count('flat'))
 
         data = ProjectEntity(
             id=project.id,
@@ -37,7 +37,7 @@ class ProjectSelector:
                     type=building.type,
                     has_parking=building.has_parking,
                     elevators=building.elevators,
-                    project=building.project.name
+                    project_name=building.project.name
                 )
                 for building in buildings
             ]

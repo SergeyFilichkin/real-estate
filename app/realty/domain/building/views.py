@@ -18,7 +18,7 @@ class BuildingListView(APIView):
         type = serializers.CharField()
         has_parking = serializers.BooleanField()
         elevators = serializers.IntegerField()
-        project = serializers.CharField()
+        project_name = serializers.CharField()
 
     def get(self, request):
         all_buildings = BuildingSelector.get_all_buildings()

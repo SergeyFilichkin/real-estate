@@ -14,7 +14,7 @@ class BuildingEntity:
     type: str
     has_parking: bool
     elevators: int
-    project: int
+    project_name: str
 
 
 @dataclass

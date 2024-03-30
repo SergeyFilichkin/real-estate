@@ -21,7 +21,7 @@ class BuildingSelector:
                 type=building.type,
                 has_parking=building.has_parking,
                 elevators=building.elevators,
-                project=building.project.name
+                project_name=building.project.name
             )
             for building in buildings
         ]

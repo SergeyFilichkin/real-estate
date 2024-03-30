@@ -36,7 +36,8 @@ class ProjectDetailView(APIView):
                 'status': serializers.CharField(),
                 'type': serializers.CharField(),
                 'has_parking': serializers.BooleanField(),
-                'elevators': serializers.IntegerField()
+                'elevators': serializers.IntegerField(),
+                'project_name': serializers.CharField()
             },
             many=True
         )

@@ -18,7 +18,7 @@ class FloorSelector:
             floor = Floor.objects.get(id=pk)
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
-        flats = floor.flat_set.all().select_related('floor', 'category')
+        flats = floor.flat_set.all().prefetch_related('floor', 'category')
 
         data = FloorEntity(
             id=floor.id,
