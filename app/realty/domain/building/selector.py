@@ -7,7 +7,7 @@ from realty.models.building import Building
 class BuildingSelector:
     @staticmethod
     def get_all_buildings():
-        buildings = Building.objects.all()
+        buildings = Building.objects.select_related('project').all()
         data = [
             BuildingEntity(
                 id=building.id,
@@ -31,7 +31,7 @@ class BuildingSelector:
     @staticmethod
     def get_building_detail(pk):
         try:
-            building = Building.objects.get(id=pk)
+            building = Building.objects.select_related('project').get(id=pk)
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
         total_flats = building.flat_set.count()
