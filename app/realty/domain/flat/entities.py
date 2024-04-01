@@ -12,6 +12,6 @@ class FlatEntity:
     price: int
     description: str
     photo: str
-    floor: int
+    floor_number: int
     category_name: str
     building_name: str

@@ -16,7 +16,7 @@ class FlatListView(APIView):
         price = serializers.IntegerField()
         description = serializers.CharField()
         photo = serializers.ImageField()
-        floor = serializers.CharField()
+        floor_number = serializers.IntegerField()
 
     def get(self, request):
         all_flats = FlatSelector.get_all_flats()
@@ -34,7 +34,7 @@ class FlatDetailView(APIView):
         price = serializers.IntegerField()
         description = serializers.CharField()
         photo = serializers.ImageField()
-        floor = serializers.CharField()
+        floor_number = serializers.IntegerField()
         category_name = serializers.CharField()
         building_name = serializers.CharField()
 

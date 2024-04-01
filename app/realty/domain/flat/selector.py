@@ -17,7 +17,7 @@ class FlatSelector:
                 price=flat.price,
                 description=flat.description,
                 photo=flat.photo,
-                floor=flat.floor,
+                floor_number=flat.floor.number,
                 category_name=flat.category.name,
                 building_name=flat.building.name
             )
@@ -39,7 +39,7 @@ class FlatSelector:
             price=flat.price,
             description=flat.description,
             photo=flat.photo,
-            floor=flat.floor,
+            floor_number=flat.floor.number,
             category_name=flat.category.name,
             building_name=flat.building.name
         )
