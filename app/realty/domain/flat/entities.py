@@ -13,5 +13,5 @@ class FlatEntity:
     description: str
     photo: str
     floor: int
-    category: int
-    building: int
+    category_name: str
+    building_name: str

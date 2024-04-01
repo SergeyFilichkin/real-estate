@@ -5,7 +5,7 @@ from realty.models.flat import Flat
 class FlatSelector:
     @staticmethod
     def get_all_flats():
-        flats = Flat.objects.all().select_related('floor', 'category')
+        flats = Flat.objects.all().select_related('floor', 'category', 'building')
         data = [
             FlatEntity(
                 id=flat.id,
@@ -18,8 +18,8 @@ class FlatSelector:
                 description=flat.description,
                 photo=flat.photo,
                 floor=flat.floor,
-                category=flat.category,
-                building=flat.building
+                category_name=flat.category.name,
+                building_name=flat.building.name
             )
             for flat in flats
         ]
@@ -28,7 +28,7 @@ class FlatSelector:
 
     @staticmethod
     def get_flat_by_id(flat_id):
-        flat = Flat.objects.select_related('floor', 'category').get(id=flat_id)
+        flat = Flat.objects.select_related('floor', 'category', 'building').get(id=flat_id)
         data = FlatEntity(
             id=flat.id,
             square=flat.square,
@@ -40,7 +40,7 @@ class FlatSelector:
             description=flat.description,
             photo=flat.photo,
             floor=flat.floor,
-            category=flat.category,
-            building=flat.building
+            category_name=flat.category.name,
+            building_name=flat.building.name
         )
         return data

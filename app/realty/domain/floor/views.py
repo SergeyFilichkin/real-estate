@@ -36,7 +36,8 @@ class FloorDetailView(APIView):
                 'description': serializers.CharField(),
                 'photo': serializers.ImageField(),
                 'floor': serializers.IntegerField,
-                'category': serializers.CharField
+                'category_name': serializers.CharField(),
+                'building_name': serializers.CharField()
             },
             many=True
         )

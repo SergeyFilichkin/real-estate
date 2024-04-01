@@ -15,5 +15,5 @@ class FlatCategory(models.Model):
     name = models.CharField(max_length=7, choices=CLASS_CHOICES, db_index=True)
 
     def __str__(self) -> str:
-        """returns FlateCategory neme description"""
+        """returns FlatCategory name description"""
         return self.get_name_display()

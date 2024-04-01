@@ -35,7 +35,8 @@ class FlatDetailView(APIView):
         description = serializers.CharField()
         photo = serializers.ImageField()
         floor = serializers.CharField()
-        category = serializers.CharField()
+        category_name = serializers.CharField()
+        building_name = serializers.CharField()
 
     def get(self, request, flat_id):
         flat = FlatSelector.get_flat_by_id(flat_id)

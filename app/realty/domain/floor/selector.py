@@ -15,10 +15,10 @@ class FloorSelector:
     @staticmethod
     def get_floor_detail(pk):
         try:
-            floor = Floor.objects.get(id=pk)
+            floor = Floor.objects.prefetch_related('flat_set').get(id=pk)
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
-        flats = floor.flat_set.all().prefetch_related('floor', 'category')
+        flats = floor.flat_set.all().select_related('floor', 'category', 'building')
 
         data = FloorEntity(
             id=floor.id,
@@ -36,8 +36,8 @@ class FloorSelector:
                     description=flat.description,
                     photo=flat.photo,
                     floor=flat.floor,
-                    category=flat.category,
-                    building=flat.building
+                    category_name=flat.category.name,
+                    building_name=flat.building.name
                 )
                 for flat in flats
             ]
