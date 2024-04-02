@@ -22,7 +22,7 @@ class FloorSelector:
             ).get(id=pk)
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
-        flats = floor.flat_set.all().select_related('floor', 'category', 'building')
+        flats = floor.flat_set.all()
 
         data = FloorEntity(
             id=floor.id,
