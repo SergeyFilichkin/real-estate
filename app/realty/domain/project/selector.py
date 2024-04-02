@@ -16,9 +16,13 @@ class ProjectSelector:
     @staticmethod
     def get_project_detail(pk):
         try:
-            project = (Project.objects.prefetch_related(
-                Prefetch('building_set', queryset=Building.objects.annotate(total_flats=Count('flat'))))
-                       .get(id=pk))
+            project = (
+                Project.objects.prefetch_related(
+                    Prefetch('building_set',
+                             queryset=Building.objects.annotate(total_flats=Count('flat')))
+                )
+                .get(id=pk)
+            )
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
 

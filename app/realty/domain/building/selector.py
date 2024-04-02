@@ -31,7 +31,11 @@ class BuildingSelector:
     @staticmethod
     def get_building_detail(pk):
         try:
-            building = Building.objects.prefetch_related('project').get(id=pk)
+            building = Building.objects.prefetch_related(
+                'flat_set__floor',
+                'flat_set__category',
+                'flat_set__building'
+            ).get(id=pk)
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
         total_flats = building.flat_set.count()

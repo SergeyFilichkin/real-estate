@@ -15,7 +15,11 @@ class FloorSelector:
     @staticmethod
     def get_floor_detail(pk):
         try:
-            floor = Floor.objects.prefetch_related('flat_set').get(id=pk)
+            floor = Floor.objects.prefetch_related(
+                'flat_set__floor',
+                'flat_set__category',
+                'flat_set__building'
+            ).get(id=pk)
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             return None
         flats = floor.flat_set.all().select_related('floor', 'category', 'building')
