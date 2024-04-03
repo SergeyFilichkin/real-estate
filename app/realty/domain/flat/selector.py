@@ -1,3 +1,5 @@
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+
 from realty.domain.flat.entities import FlatEntity
 from realty.models.flat import Flat
 
@@ -28,7 +30,11 @@ class FlatSelector:
 
     @staticmethod
     def get_flat_by_id(flat_id):
-        flat = Flat.objects.select_related('floor', 'category', 'building').get(id=flat_id)
+        try:
+            flat = Flat.objects.select_related('floor', 'category', 'building').get(id=flat_id)
+        except (ObjectDoesNotExist, MultipleObjectsReturned):
+            return None
+
         data = FlatEntity(
             id=flat.id,
             square=flat.square,
