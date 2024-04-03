@@ -1,16 +1,17 @@
 from django.conf.urls.static import static
-from django.urls import path
+from django.urls import path, include
 
 from config import settings
-from .views import FlatListView, FlatDetailView, FloorListView, FloorDetailView, BuildingListView, BuildingDetailView
+
+api_v1_urls = [
+    path('flats/', include('realty.domain.flat.urls')),
+    path('buildings/', include('realty.domain.building.urls')),
+    path('floors/', include('realty.domain.floor.urls')),
+    path('projects/', include('realty.domain.project.urls'))
+]
 
 urlpatterns = [
-    path('flats/', FlatListView.as_view()),
-    path('flats/<int:flat_id>/', FlatDetailView.as_view()),
-    path('floors/', FloorListView.as_view()),
-    path('floors/<int:pk>/', FloorDetailView.as_view()),
-    path('buildings/', BuildingListView.as_view()),
-    path('buildings/<int:building_id>/', BuildingDetailView.as_view())
+    path('v1/', include(api_v1_urls)),
 ]
 
 if settings.DEBUG:
