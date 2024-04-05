@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 *.env*
-/.venv
+/venv
 /.idea
 __pycache__/
 *.sqlite3
+=======
+*.env*
+/venv
+/.idea
+__pycache__/
+*.sqlite3
+>>>>>>> fa9e7f8 (M-4: Внесение изменений в .gitignore)
