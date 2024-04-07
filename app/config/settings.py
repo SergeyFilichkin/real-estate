@@ -21,7 +21,8 @@ INSTALLED_APPS = [
     'realty.apps.RealtyConfig',
     'account.apps.AccountConfig',
     'rest_framework',
-    'drf_spectacular'
+    'drf_spectacular',
+    'djoser'
 ]
 
 MIDDLEWARE = [
@@ -96,3 +97,26 @@ MEDIA_URL = '/media/'
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
 }
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer',)
+}
+
+DJOSER = {
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'SEND_ACTIVATION_EMAIL': True,
+    'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
+    'TOKEN_MODEL': None,
+    'ACTIVATION_URL': 'auth/verify/{uid}/{token}/'
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'django-auth@kantegory.me'
+EMAIL_HOST_PASSWORD = 'secret123'
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = 'django-auth@kantegory.me'
+
+AUTH_USER_MODEL = 'account.User'
