@@ -55,14 +55,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -95,7 +93,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
 }
 
 SIMPLE_JWT = {
@@ -104,7 +109,7 @@ SIMPLE_JWT = {
 
 DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE': True,
-    'SEND_ACTIVATION_EMAIL': True,
+    'SEND_ACTIVATION_EMAIL': False,
     'SET_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'TOKEN_MODEL': None,
