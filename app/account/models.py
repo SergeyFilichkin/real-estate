@@ -6,14 +6,14 @@ from account.managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField('username', max_length=255, unique=True)
-    email = models.EmailField('email_address', null=True, blank=True)
-    phone = models.CharField('phone_number', max_length=30, null=True, blank=True)
-    date_joined = models.DateTimeField('date_joined', auto_now_add=True)
-    is_active = models.BooleanField('active', default=False)
-    is_staff = models.BooleanField('staff', default=False)
+    username = models.CharField(verbose_name='username', max_length=255, unique=True)
+    email = models.EmailField(verbose_name='email_address')
+    phone = models.CharField(verbose_name='phone_number', max_length=30, null=True, blank=True)
+    date_joined = models.DateTimeField(verbose_name='date_joined', auto_now_add=True)
+    is_active = models.BooleanField(verbose_name='active', default=False)
+    is_staff = models.BooleanField(verbose_name='staff', default=False)
 
-    is_verified = models.BooleanField('verified', default=False)
+    is_verified = models.BooleanField(verbose_name='verified', default=False)
 
     objects = UserManager()
 

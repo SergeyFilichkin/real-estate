@@ -7,6 +7,12 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG')
 
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 ALLOWED_HOSTS = ['*']
@@ -118,10 +124,5 @@ DJOSER = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'django-auth@kantegory.me'
-EMAIL_HOST_PASSWORD = 'secret123'
-EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = 'django-auth@kantegory.me'
 
 AUTH_USER_MODEL = 'account.User'
