@@ -1,20 +1,29 @@
-from django.core.validators import MinValueValidator
 from django.db import models
 
 
 class Flat(models.Model):
-
-    STATUS_CHOICES = [
-        ('On sale', 'В продаже'),
-        ('Sold', 'Продана')
+    WINDOW_VIEWS = [
+        ("courtyard", "внутренний двор"),
+        ("street_outside", "внешняя улица")
     ]
+    ON_GROUND = "on_ground"
+    UNDERGROUND = "underground"
 
-    square = models.FloatField(verbose_name='Общая площадь', validators=[MinValueValidator(limit_value=0)])
-    living_space = models.FloatField(verbose_name='Жилая площадь', validators=[MinValueValidator(limit_value=0)])
-    kitchen_area = models.FloatField(verbose_name='Площадь кухни', validators=[MinValueValidator(limit_value=0)])
-    rooms = models.PositiveSmallIntegerField(verbose_name='Количество комнат')
-    floor = models.PositiveSmallIntegerField(verbose_name='Этаж')
-    status = models.CharField(max_length=7, choices=STATUS_CHOICES, default='On sale', verbose_name='Статус')
-    price = models.PositiveBigIntegerField(verbose_name='Цена')
-    description = models.TextField(verbose_name='Описание')
-    photo = models.ImageField()
+    PARKING_CHOICES = (
+        (ON_GROUND, "наземный"),
+        (UNDERGROUND, "подземный")
+    )
+
+    name = models.CharField(max_length=120)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    overall_square = models.IntegerField()
+    living_square = models.IntegerField()
+    rooms = models.IntegerField()
+    view_from_windows = models.CharField(max_length=120, choices=WINDOW_VIEWS, default="courtyard", blank=True)
+    lavatory = models.IntegerField()
+    level = models.IntegerField()
+    elevator = models.CharField(max_length=120)
+    year_of_sale = models.IntegerField()
+    parking = models.CharField(max_length=50, choices=PARKING_CHOICES, default=ON_GROUND)
+    is_complete = models.BooleanField(default=True)
+    is_kitchen = models.BooleanField()
