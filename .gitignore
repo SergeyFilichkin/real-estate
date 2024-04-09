@@ -1,11 +1,4 @@
 *.env*
 /.venv
 /.idea
-app/config/__pycache__/__init__.cpython-310.pyc
-app/config/__pycache__/settings.cpython-310.pyc
-app/config/settings.py
-app/realty/__pycache__/__init__.cpython-310.pyc
-app/realty/__pycache__/admin.cpython-310.pyc
-app/realty/__pycache__/apps.cpython-310.pyc
-app/realty/__pycache__/models.cpython-310.pyc
-app/realty/migrations/__pycache__/__init__.cpython-310.pyc
+__pycache__/
