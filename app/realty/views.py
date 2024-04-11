@@ -1,9 +1,7 @@
 from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from realty.models import Flat
-from realty.selectors import flat_list
+from realty.selectors import FlatSelector
 
 
 class FlatListAPI(APIView):
@@ -24,7 +22,7 @@ class FlatListAPI(APIView):
         has_kitchen = serializers.BooleanField()
 
     def get(self, request):
-        flats = flat_list()
+        flats = FlatSelector.flat_list()
 
         data = self.FlatListSerializer(flats, many=True).data
 
