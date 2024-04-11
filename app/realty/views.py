@@ -1,33 +1,31 @@
-from django.http import JsonResponse
-from django.views.generic import ListView
+from rest_framework import serializers
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from realty.models import Flat
+from realty.selectors import flat_list
 
 
-class FlatsListView(ListView):
-    model = Flat
+class FlatListAPI(APIView):
+    class FlatListSerializer(serializers.Serializer):
+        id = serializers.IntegerField()
+        name = serializers.CharField(max_length=120)
+        price = serializers.IntegerField()
+        overall_square = serializers.IntegerField()
+        living_square = serializers.IntegerField()
+        rooms = serializers.IntegerField()
+        view_from_windows = serializers.CharField()
+        lavatory = serializers.IntegerField()
+        level = serializers.IntegerField()
+        elevator = serializers.IntegerField()
+        year_of_sale = serializers.IntegerField()
+        parking = serializers.CharField()
+        is_complete = serializers.BooleanField()
+        has_kitchen = serializers.BooleanField()
 
-    def get(self, request, *args, **kwargs):
-        super.get(request, *args, **kwargs)
+    def get(self, request):
+        flats = flat_list()
 
-        response = []
+        data = self.FlatListSerializer(flats, many=True).data
 
-        for flat in self.object_list():
-            response.append({
-                "id": flat.id,
-                "name": flat.name,
-                "price": flat.price,
-                "overall_square": flat.overall_square,
-                "rooms": flat.rooms,
-                "view_from_windows": flat.view_from_windows,
-                "lavatory": flat.lavatory,
-                "level": flat.level,
-                "elevator": flat.elevator,
-                "year_of_sale": flat.year_of_sale,
-                "parking": flat.parking,
-                "is_complete": flat.is_complete,
-                "is_kitchen": flat.is_kitchen,
-
-            })
-
-        return JsonResponse(response, safe=False)
+        return Response(data)

@@ -2,10 +2,13 @@ from django.db import models
 
 
 class Flat(models.Model):
+    COURTYARD = "courtyard"
+    STREET_OUTSIDE = "street_outside"
     WINDOW_VIEWS = [
         ("courtyard", "внутренний двор"),
         ("street_outside", "внешняя улица")
     ]
+
     ON_GROUND = "on_ground"
     UNDERGROUND = "underground"
 
@@ -15,15 +18,15 @@ class Flat(models.Model):
     )
 
     name = models.CharField(max_length=120)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    overall_square = models.IntegerField()
-    living_square = models.IntegerField()
-    rooms = models.IntegerField()
-    view_from_windows = models.CharField(max_length=120, choices=WINDOW_VIEWS, default="courtyard", blank=True)
-    lavatory = models.IntegerField()
-    level = models.IntegerField()
-    elevator = models.CharField(max_length=120)
-    year_of_sale = models.IntegerField()
+    price = models.PositiveIntegerField()
+    overall_square = models.PositiveIntegerField()
+    living_square = models.PositiveIntegerField()
+    rooms = models.PositiveIntegerField()
+    view_from_windows = models.CharField(max_length=120, choices=WINDOW_VIEWS, default=COURTYARD, blank=True)
+    lavatory = models.PositiveIntegerField()
+    level = models.PositiveIntegerField()
+    elevator = models.PositiveIntegerField()
+    year_of_sale = models.PositiveIntegerField()
     parking = models.CharField(max_length=50, choices=PARKING_CHOICES, default=ON_GROUND)
-    is_complete = models.BooleanField(default=True)
-    is_kitchen = models.BooleanField()
+    is_complete = models.BooleanField(default=False)
+    has_kitchen = models.BooleanField()
