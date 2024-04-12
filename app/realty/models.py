@@ -6,7 +6,7 @@ class Floor(models.Model):
 
     class Meta:
         verbose_name = "Этаж"
-        Verbose_name_plural = "Этажи"
+        verbose_name_plural = "Этажи"
 
     def __str__(self):
         return self.number
