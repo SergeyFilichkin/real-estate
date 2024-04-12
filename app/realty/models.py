@@ -1,6 +1,17 @@
 from django.db import models
 
 
+class Floor(models.Model):
+    number = models.PositiveSmallIntegerField()
+
+    class Meta:
+        verbose_name = "Этаж"
+        Verbose_name_plural = "Этажи"
+
+    def __str__(self):
+        return self.number
+
+
 class Flat(models.Model):
     COURTYARD = "courtyard"
     STREET_OUTSIDE = "street_outside"
@@ -30,3 +41,11 @@ class Flat(models.Model):
     parking = models.CharField(max_length=50, choices=PARKING_CHOICES, default=ON_GROUND)
     is_complete = models.BooleanField(default=False)
     has_kitchen = models.BooleanField()
+    floor = models.ManyToManyField(Floor)
+
+    class Meta:
+        verbose_name = "Квартира"
+        verbose_name_plural = "Квартиры"
+
+    def __str__(self):
+        return self.name
