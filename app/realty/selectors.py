@@ -7,3 +7,8 @@ class FlatSelector:
         flats = Flat.objects.all()
 
         return flats
+
+    def get_flat(self, pk):
+        flat = Flat.objects.get(pk)
+
+        return flat
