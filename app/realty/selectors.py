@@ -8,7 +8,8 @@ class FlatSelector:
 
         return flats
 
-    def get_flat(self, pk):
+    @staticmethod
+    def get_flat(pk):
         flat = Flat.objects.get(pk)
 
         return flat

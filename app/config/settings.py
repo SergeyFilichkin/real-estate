@@ -98,7 +98,7 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Hunting API',
-    'DESCRIPTION': 'Awesome hunting project',
+    'TITLE': 'Real-estate API',
+    'DESCRIPTION': 'Estate flat for estate people',
     'VERSION': '1.0.0',
 }
