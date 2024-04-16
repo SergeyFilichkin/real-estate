@@ -1,0 +1,46 @@
+Index: app/realty/views.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.shortcuts import render\n\n# Create your views here.\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/realty/views.py b/app/realty/views.py
+--- a/app/realty/views.py	(revision 7dcfdbdcb7ca854a0b5b88fb07d8e1c659c75cd2)
++++ b/app/realty/views.py	(date 1712661995118)
+@@ -1,3 +1,33 @@
+-from django.shortcuts import render
++from django.http import JsonResponse
++from django.views.generic import ListView
++
++from realty.models import Flat
++
++
++class FlatsListView(ListView):
++    model = Flat
+ 
+-# Create your views here.
++    def get(self, request, *args, **kwargs):
++        super.get(request, *args, **kwargs)
++
++        response = []
++
++        for flat in self.object_list():
++            response.append({
++                "id": flat.id,
++                "name": flat.name,
++                "price": flat.price,
++                "overall_square": flat.overall_square,
++                "rooms": flat.rooms,
++                "view_from_windows": flat.view_from_windows,
++                "lavatory": flat.lavatory,
++                "level": flat.level,
++                "elevator": flat.elevator,
++                "year_of_sale": flat.year_of_sale,
++                "parking": flat.parking,
++                "is_complete": flat.is_complete,
++                "is_kitchen": flat.is_kitchen,
++
++            })
++
++        return JsonResponse(response, safe=False)

@@ -1,0 +1,39 @@
+Index: app/realty/selectors.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from realty.models import Flat\n\n\nclass FlatSelector:\n    @staticmethod\n    def flat_list():\n        flats = Flat.objects.all()\n\n        return flats\n\n    def get_flat(self, pk):\n        flat = Flat.objects.get(pk)\n\n        return flat\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/realty/selectors.py b/app/realty/selectors.py
+--- a/app/realty/selectors.py	(revision 15b67339b720a4aae9080c795de2137f98034339)
++++ b/app/realty/selectors.py	(date 1713253291644)
+@@ -7,8 +7,3 @@
+         flats = Flat.objects.all()
+ 
+         return flats
+-
+-    def get_flat(self, pk):
+-        flat = Flat.objects.get(pk)
+-
+-        return flat
+Index: app/config/settings.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from pathlib import Path\nimport os\nfrom dotenv import load_dotenv\n\nload_dotenv()\n\nSECRET_KEY = os.getenv('SECRET_KEY')\nDEBUG = os.getenv('DEBUG')\n\nBASE_DIR = Path(__file__).resolve().parent.parent\n\nALLOWED_HOSTS = ['*']\n\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'rest_framework',\n    'realty.apps.RealtyConfig'\n    'drf_spectacular'\n]\n\nMIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]\n\nROOT_URLCONF = 'config.urls'\n\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',\n                'django.contrib.auth.context_processors.auth',\n                'django.contrib.messages.context_processors.messages',\n            ],\n        },\n    },\n]\n\nWSGI_APPLICATION = 'config.wsgi.application'\n\n\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n\n\nAUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',\n    },\n]\n\nLANGUAGE_CODE = 'en-us'\n\nTIME_ZONE = 'UTC'\n\nUSE_I18N = True\n\nUSE_TZ = True\n\nSTATIC_URL = 'static/'\n\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n\nMEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n\n\nREST_FRAMEWORK = {\n    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',\n}\n\nSPECTACULAR_SETTINGS = {\n    'TITLE': 'Real-estate API',\n    'DESCRIPTION': 'Estate flat for estate people',\n    'VERSION': '1.0.0',\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/config/settings.py b/app/config/settings.py
+--- a/app/config/settings.py	(revision 15b67339b720a4aae9080c795de2137f98034339)
++++ b/app/config/settings.py	(date 1713253287424)
+@@ -98,7 +98,7 @@
+ }
+ 
+ SPECTACULAR_SETTINGS = {
+-    'TITLE': 'Real-estate API',
+-    'DESCRIPTION': 'Estate flat for estate people',
++    'TITLE': 'Hunting API',
++    'DESCRIPTION': 'Awesome hunting project',
+     'VERSION': '1.0.0',
+ }

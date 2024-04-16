@@ -1,0 +1,19 @@
+Index: app/realty/selectors.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from realty.models import Flat\n\n\nclass FlatSelector:\n    @staticmethod\n    def flat_list():\n        flats = Flat.objects.all()\n\n        return flats\n\n    def get_flat(self, pk):\n        flat = Flat.objects.get(pk)\n\n        return flat\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/realty/selectors.py b/app/realty/selectors.py
+--- a/app/realty/selectors.py	(revision 65fa2de03ad4f4706370359367c39f90b393f87e)
++++ b/app/realty/selectors.py	(date 1713253833663)
+@@ -7,8 +7,3 @@
+         flats = Flat.objects.all()
+ 
+         return flats
+-
+-    def get_flat(self, pk):
+-        flat = Flat.objects.get(pk)
+-
+-        return flat
