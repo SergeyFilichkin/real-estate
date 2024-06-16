@@ -2,6 +2,8 @@ from django.contrib import admin
 
 from realty.models.flat import Flat
 
+from realty.models.floor import Floor
+
 
 class FlatAdmin(admin.ModelAdmin):
     list_display = (
@@ -26,3 +28,12 @@ class FlatAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Flat, FlatAdmin)
+
+
+class FloorAdmin(admin.ModelAdmin):
+    list_display = [
+        "name"
+    ]
+
+
+admin.site.register(Floor, FloorAdmin)
